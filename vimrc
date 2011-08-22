@@ -15,5 +15,5 @@ set incsearch
 set number
 
 
-colorscheme koehler
+colorscheme tango
 
