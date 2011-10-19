@@ -17,3 +17,5 @@ set number
 
 colorscheme tango
 
+map <C-C> :
+
