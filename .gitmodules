@@ -5,5 +5,5 @@
 	path = bundle/tagbar
 	url = git://github.com/majutsushi/tagbar.git
 [submodule "bundle/vim_colors/colors"]
-	path = bundle/vim_colors/colors
-	url = git://github.com/squil/vim_colors.git
+	path = bundle/vim_colors
+	url = git://github.com/hrp/vim_colors.git
