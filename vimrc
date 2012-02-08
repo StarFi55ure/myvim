@@ -14,6 +14,7 @@ set hlsearch
 set incsearch
 set number
 
+inoremap jj <Esc>
 
 colorscheme tango
 
