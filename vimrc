@@ -19,4 +19,9 @@ inoremap jj <Esc>
 colorscheme tango
 
 map <C-C> :
+map <F2> :NERDTreeToggle<CR>
+
+" Must figure out what this does
+autocmd VimEnter * NERDTree
+autocmd VimEnter * wincmd p
 

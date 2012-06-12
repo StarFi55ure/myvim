@@ -7,3 +7,6 @@
 [submodule "bundle/vim_colors"]
 	path = bundle/vim_colors
 	url = git://github.com/hrp/vim_colors.git
+[submodule "bundle/nerdtree"]
+	path = bundle/nerdtree
+	url = git://github.com/scrooloose/nerdtree.git
