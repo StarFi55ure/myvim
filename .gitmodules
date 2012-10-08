@@ -10,3 +10,6 @@
 [submodule "bundle/nerdtree"]
 	path = bundle/nerdtree
 	url = git://github.com/scrooloose/nerdtree.git
+[submodule "bundle/xterm-color-table"]
+	path = bundle/xterm-color-table
+	url = http://github.com/guns/xterm-color-table.vim
