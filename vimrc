@@ -25,6 +25,12 @@ set t_Co=256
 colorscheme tango
 
 "========================================
+" My custom settings
+"========================================
+let g:ctrlp_open_new_file = 'h'
+let g:ctrlp_arg_map = 1
+
+"========================================
 " My custom mappings
 "========================================
 map <C-C> :
