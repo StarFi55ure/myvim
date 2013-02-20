@@ -29,6 +29,7 @@ colorscheme tango
 "========================================
 let g:ctrlp_open_new_file = 'h'
 let g:ctrlp_arg_map = 1
+let g:ctrlp_max_files = 20000
 
 "========================================
 " My custom mappings
@@ -38,11 +39,11 @@ map <F2> :NERDTreeToggle<CR>
 
 set encoding=utf-8
 
-map OA <M-Up>
-map OB <M-Down>
+map k <M-k>
+map j <M-j>
 
-map <M-Up> <Esc><Esc><Esc><Esc><C-W>k<C-W>_
-map <M-Down> <Esc><Esc><Esc><Esc><C-W>j<C-W>_
+noremap <M-k> <Esc><Esc><Esc><Esc><C-W>k<C-W>_
+noremap <M-j> <Esc><Esc><Esc><Esc><C-W>j<C-W>_
 
 " Must figure out what this does
 "autocmd VimEnter * NERDTree
