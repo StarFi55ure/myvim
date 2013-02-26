@@ -48,3 +48,4 @@ noremap <M-j> <Esc><Esc><Esc><Esc><C-W>j<C-W>_
 " Must figure out what this does
 "autocmd VimEnter * NERDTree
 autocmd VimEnter * wincmd p
+

@@ -28,19 +28,19 @@ syn region pythonStringTrippleQuote start='"""' end='"""' keepend
 syn region pythonCommentSingle start="#" end="$" keepend
 
 
-hi pythonClassName          ctermfg=135 cterm=Bold
-hi pythonDefKeyword         ctermfg=46
-hi pythonKeyword            ctermfg=39 cterm=Bold
-hi pythonMethod             ctermfg=124
-hi pythonSelfKeyword        ctermfg=172 cterm=Bold
+hi pythonClassName          ctermfg=135 guifg=#AF5FFF cterm=Bold gui=Bold
+hi pythonDefKeyword         ctermfg=46 guifg=#55FF55
+hi pythonKeyword            ctermfg=39 guifg=#00AFFF cterm=Bold
+hi pythonMethod             ctermfg=124 guifg=#AF0000
+hi pythonSelfKeyword        ctermfg=172 guifg=#D78700 cterm=Bold
 
-hi pythonStringSingleQuote  ctermfg=41 cterm=Bold
-hi pythonStringDoubleQuote  ctermfg=41 cterm=Bold
-hi pythonStringTrippleQuote ctermfg=47
+hi pythonStringSingleQuote  ctermfg=41 guifg=#00D75F cterm=Bold
+hi pythonStringDoubleQuote  ctermfg=41 guifg=#00D75F cterm=Bold
+hi pythonStringTrippleQuote ctermfg=47 guifg=#00FF5F
 
-hi pythonDecorator          ctermfg=33
+hi pythonDecorator          ctermfg=33 guifg=#0087FF
 
-hi pythonCommentSingle      ctermfg=184
+hi pythonCommentSingle      ctermfg=184 guifg=#D7D700
 
 let b:current_syntax = "pythonj"
 
