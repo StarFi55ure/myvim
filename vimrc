@@ -45,6 +45,17 @@ map j <M-j>
 noremap <M-k> <Esc><Esc><Esc><Esc><C-W>k<C-W>_
 noremap <M-j> <Esc><Esc><Esc><Esc><C-W>j<C-W>_
 
+"force myself to use vim properly
+map <Up> <nop>
+map <Down> <nop>
+map <Left> <nop>
+map <Right> <nop>
+
+imap <Up> <nop>
+imap <Down> <nop>
+imap <Left> <nop>
+imap <Right> <nop>
+
 " Must figure out what this does
 "autocmd VimEnter * NERDTree
 autocmd VimEnter * wincmd p
