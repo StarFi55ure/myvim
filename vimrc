@@ -29,9 +29,10 @@ colorscheme tango
 "========================================
 let g:ctrlp_open_new_file = 'h'
 let g:ctrlp_arg_map = 1
-let g:ctrlp_max_files = 30000
+let g:ctrlp_max_files = 40000
 let g:ctrlp_max_height = 30
 let g:ctrlp_max_depth = 15
+let g:ctrlp_user_command = 'find %s -type f'
 
 "========================================
 " My custom mappings
