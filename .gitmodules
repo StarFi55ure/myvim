@@ -1,24 +1,32 @@
 [submodule "bundle/supertab"]
 	path = bundle/supertab
 	url = git://github.com/ervandew/supertab.git
+    ignore = dirty
 [submodule "bundle/tagbar"]
 	path = bundle/tagbar
 	url = git://github.com/majutsushi/tagbar.git
+    ignore = dirty
 [submodule "bundle/vim_colors"]
 	path = bundle/vim_colors
 	url = git://github.com/hrp/vim_colors.git
+    ignore = dirty
 [submodule "bundle/nerdtree"]
 	path = bundle/nerdtree
 	url = git://github.com/scrooloose/nerdtree.git
+    ignore = dirty
 [submodule "bundle/xterm-color-table"]
 	path = bundle/xterm-color-table
 	url = http://github.com/guns/xterm-color-table.vim
+    ignore = dirty
 [submodule "bundle/ctrlp"]
 	path = bundle/ctrlp
 	url = https://github.com/kien/ctrlp.vim.git
+    ignore = dirty
 [submodule "bundle/fugitive"]
 	path = bundle/fugitive
 	url = git://github.com/tpope/vim-fugitive.git
+    ignore = dirty
 [submodule "bundle/ultisnips"]
 	path = bundle/ultisnips
 	url = git://github.com/SirVer/ultisnips.git
+    ignore = dirty
