@@ -18,6 +18,8 @@ set textwidth=80
 
 autocmd FileType text setlocal textwidth=80
 
+autocmd BufRead,BufNewFile *.tal set filetype=html
+
 inoremap jj <Esc>
 
 set t_Co=256
@@ -48,7 +50,9 @@ map j <M-j>
 noremap <M-k> <Esc><Esc><Esc><Esc><C-W>k<C-W>_
 noremap <M-j> <Esc><Esc><Esc><Esc><C-W>j<C-W>_
 
+"========================================
 "force myself to use vim properly
+"========================================
 map <Up> <nop>
 map <Down> <nop>
 map <Left> <nop>
@@ -59,7 +63,5 @@ imap <Down> <nop>
 imap <Left> <nop>
 imap <Right> <nop>
 
-" Must figure out what this does
-"autocmd VimEnter * NERDTree
 autocmd VimEnter * wincmd p
 
