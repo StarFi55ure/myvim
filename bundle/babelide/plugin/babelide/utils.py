@@ -32,14 +32,9 @@ def install_virtual_env(root_dir):
 
 
 def install_package(virtualenv_path, package_name):
+    '''
+    Might not be used in the future
+    '''
+    pass
     
-    pip_exe = os.path.join(virtualenv_path, 'bin', _pip_bin);
-
-    print 'using pip_exe ', pip_exe
-    proc = subprocess.Popen(
-            [pip_exe,
-                'install',
-                package_name])
-    proc.wait()
-
 

@@ -8,7 +8,7 @@
 "endif
 
 syn match pythonClassName "class\s[a-zA-Z_][a-zA-Z_\d]*"lc=5
-syn match pythonMethod "def\s[a-zA-Z_][a-zA-Z_\d]*\s*"lc=3
+syn match pythonMethod "def\s[a-zA-Z_][a-zA-Z_0-9]*\s*"lc=3
 syn match pythonDecorator "^@[a-zA-Z_][a-zA-Z_\d]*"
 
 syn keyword pythonDefKeyword def 

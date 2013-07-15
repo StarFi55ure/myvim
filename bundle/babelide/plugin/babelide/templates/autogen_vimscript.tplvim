@@ -1,0 +1,12 @@
+
+"=========================================================
+" Auto generated function entry points
+"=========================================================
+
+{% for func_name,func in functions.iteritems() %}
+
+function! BabelIDE_{{ func_name }}()
+    exec g:_uspy "BabelIDE_Manager.call_entry_point('{{ func_name }}')"
+endfunction
+
+{% endfor %}
