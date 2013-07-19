@@ -4,7 +4,12 @@ import os.path as osp
 import subprocess
 import sys
 
-from jinja2 import Environment, PackageLoader
+try:
+    from jinja2 import Environment, PackageLoader
+except:
+    pass
+
+import vim
 
 from babelide.utils import install_virtual_env
 from babelide.utils import install_package
@@ -31,14 +36,20 @@ class IDEManager(object):
 
         # check if the virtual env is setup
         self.__virtualenv_path = osp.join(babelide_basedir, 'pyenv')
+        exit_on_init = False
         if not osp.exists(self.__virtualenv_path):
             install_virtual_env( babelide_basedir )
+            exit_on_init = True
         
         self.__python_exe = osp.join(self.__virtualenv_path, 'bin', 'python')
         self.__easyinstall_exe = osp.join(self.__virtualenv_path, 'bin',
                 'easy_install')
 
         self.update_packages()
+
+        if exit_on_init:
+            self.exit_on_init()
+
 
         # load ide plugins
         self.__plugins = []
@@ -51,6 +62,16 @@ class IDEManager(object):
         # build vim script of plugin wrappers
         self._build_wrapper_file()
 
+    def exit_on_init(self):
+        """Exit after virtualenv created to allow for restarting vim's python
+        runtime.
+
+        """
+        print('*'*80)
+        print('    Please restart vim')
+        print('*'*80)
+
+        vim.command('exit()')
 
     def destroy(self):
         """This is a cleanup method that gets called on vim exit"""
