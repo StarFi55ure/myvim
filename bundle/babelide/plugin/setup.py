@@ -7,7 +7,8 @@ setup(
 
     install_requires = [
         'requests',
-        'jinja2'
+        'jinja2',
+        'websocket-client'
         ]
 )
 

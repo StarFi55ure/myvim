@@ -19,6 +19,7 @@ syn keyword pythonKeyword for from global if import in is
 syn keyword pythonKeyword lambda not or pass print raise 
 syn keyword pythonKeyword return try while with yield
 syn keyword pythonKeyword False True
+syn keyword pythonKeyword None
 
 syn keyword pythonSelfKeyword self
 

@@ -1,5 +1,6 @@
 import os
 import sys
+import random
 import subprocess
 
 
@@ -38,3 +39,11 @@ def install_package(virtualenv_path, package_name):
     pass
     
 
+def random_string():
+    """Return a randomly generated string
+
+    :length: @todo
+    :returns: @todo
+
+    """
+    return '%030x' % random.randrange(16**30)
