@@ -30,3 +30,6 @@
 	path = bundle/ultisnips
 	url = git://github.com/SirVer/ultisnips.git
     ignore = dirty
+[submodule "bundle/robotframework-vim"]
+	path = bundle/robotframework-vim
+	url = git@github.com:mfukar/robotframework-vim.git
