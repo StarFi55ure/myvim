@@ -14,6 +14,7 @@ import vim
 from babelide.utils import install_virtual_env
 from babelide.utils import install_package
 
+from babelide.plugins.base import BabelIDE_Base_Plugin
 from babelide.plugins.html5 import BabelIDE_HTML5_Plugin
 
 class IDEManager(object):
@@ -51,13 +52,18 @@ class IDEManager(object):
             self.exit_on_init()
 
 
-        # load ide plugins
+        # setup global data structures
         self.__plugins = []
+        self.__actions = {}
+
+        # load ide plugins
+        self._loadBase()
         self._loadHTML5()
 
         # accumulate data for wrapper generation
         self._accumulate_plugin_functions()
         self._accumulate_plugin_mappings()
+        self._accumulate_plugin_actions()
 
         # build vim script of plugin wrappers
         self._build_wrapper_file()
@@ -100,11 +106,15 @@ class IDEManager(object):
 
             subprocess.Popen('touch {}'.format(touch_file), shell=True)
 
+    def _loadBase(self):
+        """Load the base functionality for the IDE"""
+        self.__plugins.append( BabelIDE_Base_Plugin(self) )
+
     def _loadHTML5(self):
         """Load the html5 plugin
 
         """
-        self.__plugins.append( BabelIDE_HTML5_Plugin() )
+        self.__plugins.append( BabelIDE_HTML5_Plugin(self) )
 
     def _accumulate_plugin_functions(self):
         """Accumulate the public functions that will be exposed to vimscript for
@@ -128,6 +138,12 @@ class IDEManager(object):
 
         """
         pass
+
+    def _accumulate_plugin_actions(self):
+        """Accumulate that the plugins expose
+        """
+        for plugin in self.__plugins:
+            self.__actions.update(plugin.get_actions())
 
     def _build_wrapper_file(self):
         """Build the vimscript wrapper file to expose all the functionality
@@ -153,12 +169,16 @@ class IDEManager(object):
     def call_entry_point(self, entry_point):
         """Call a function entry point from one of the plugins"""
         
-        print entry_point
         plugin_name, func = entry_point.split('_', 1)
         for plugin in self.__plugins:
             class_name = 'BabelIDE_{}_Plugin'.format(plugin_name)
             if plugin.__class__.__name__ == class_name:
                 getattr(plugin, func)()
+
+    def get_action_list(self, filetype):
+        """ Return the list of actions for a particular filetype"""
+        return self.__actions.get(filetype, {})
+
 
 
 # setup main  ide manager singleton

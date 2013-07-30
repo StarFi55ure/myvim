@@ -14,9 +14,9 @@ from babelide.utils import random_string
 class BabelIDE_HTML5_Plugin(BabelIDE_Plugin):
     """This class implements HTML5 functionality"""
 
-    def __init__(self):
+    def __init__(self, manager):
         """@todo: to be defined1 """
-        BabelIDE_Plugin.__init__(self)
+        super(BabelIDE_HTML5_Plugin, self).__init__(manager)
 
         # remote chrome attributes
         self.__remote_chrome_inst = None
@@ -26,6 +26,28 @@ class BabelIDE_HTML5_Plugin(BabelIDE_Plugin):
         self.__chrome_userdir = osp.expanduser(self.__chrome_userdir)
 
         self.__chrome_remote_port = 9222
+    
+    def get_actions(self):
+        """Get the list of all filetypes actions that can be performed
+
+        @returns Dictionary of filetype to action mappings
+        """
+        class MyAction(object):
+
+            def __init__(self, name):
+                """
+                :returns: @todo
+
+                """
+                self.name = name
+
+        actions = {}
+        for i in range(10):
+            if 'python' not in actions:
+                actions['python'] = []
+            actions['python'].append(MyAction('Action {}'.format(i)))
+         
+        return actions
 
     @expose
     def open_remote_chrome_debug_session(self):
