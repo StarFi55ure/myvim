@@ -11,6 +11,24 @@ def expose(func, *args, **kwargs):
 
     return func
 
+def autocommand(event, pattern, filetype='*'):
+    '''Decorator to register an autocommand from a plugin'''
+
+    def wrap(func):
+        if not hasattr(func, '__autocmd__'):
+            func.__autocmd__ = []
+
+        acmd = {}
+        acmd['event'] = event
+        acmd['filetype'] = filetype
+        acmd['pattern'] = pattern
+        acmd['is_buffer_local'] = pattern == '<buffer>'
+
+        func.__autocmd__.append(acmd)
+        return func
+
+    return wrap
+
 
 class BabelIDE_Plugin(object):
     """Base class for BabelIDE plugins"""

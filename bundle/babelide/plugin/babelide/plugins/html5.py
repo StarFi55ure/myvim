@@ -8,6 +8,7 @@ import vim
 
 from babelide.plugins.base import BabelIDE_Plugin
 from babelide.plugins.base import expose
+from babelide.plugins.base import autocommand
 
 from babelide.utils import random_string
 
@@ -87,5 +88,13 @@ class BabelIDE_HTML5_Plugin(BabelIDE_Plugin):
             print 'buffer contents: '
             print '\n'.join(lines)
 
+    #@autocommand('CursorMovedI', ['*.vim', '*.py', '*.html'])
+    def cursor_moved(self):
+        '''Move cursor'''
+        print "cursor has moved"
 
+    #@autocommand('InsertLeave', ['*.vim', '*.js'])
+    def insert_leave(self):
+        '''Leave insert mode'''
+        print 'insert leave'
 

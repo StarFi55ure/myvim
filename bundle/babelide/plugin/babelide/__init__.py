@@ -3,6 +3,7 @@ import inspect
 import os.path as osp
 import subprocess
 import sys
+import re
 
 try:
     from jinja2 import Environment, PackageLoader
@@ -62,8 +63,8 @@ class IDEManager(object):
 
         # accumulate data for wrapper generation
         self._accumulate_plugin_functions()
-        self._accumulate_plugin_mappings()
         self._accumulate_plugin_actions()
+        self._accumulate_plugin_mappings()
 
         # build vim script of plugin wrappers
         self._build_wrapper_file()
@@ -126,12 +127,25 @@ class IDEManager(object):
             plugin_name = plugin.__class__.__name__
             plugin_name = plugin_name.replace('BabelIDE_', '')
             plugin_name = plugin_name.replace('_Plugin', '')
-            all_funcs.update( { '{}_{}'.format(plugin_name, x[0]):x[1] 
+
+            def CC_func_name(fname):
+                t = fname.replace('_','-').capitalize()
+                func_name = 'Babel{}{}'.format(plugin_name,t)
+                func_name = re.sub('(-|^)([a-z])', lambda p: p.group(2).upper(),
+                        func_name)
+
+                entry_point = '{}_{}'.format(plugin_name, fname)
+                return '{}:{}'.format(func_name, entry_point)
+
+            all_funcs.update( { CC_func_name(x[0]):x[1] 
                 for x in inspect.getmembers(plugin, inspect.ismethod)} )
         
-        exposed_funcs = {x:y for x,y in all_funcs.iteritems() if hasattr(y, '__exposed__')}
+        self._exposed_funcs = {x:y for x,y in all_funcs.iteritems() if hasattr(y, 
+            '__exposed__')}
 
-        self.__exposed_funcs = exposed_funcs
+        self._autocommands = {x:y for x,y in all_funcs.iteritems() if hasattr(y,
+            '__autocmd__')}
+
 
     def _accumulate_plugin_mappings(self):
         """Accumulate key mappings from plugin objects
@@ -161,7 +175,8 @@ class IDEManager(object):
             autogen_template = env.get_template('autogen_vimscript.tplvim')
 
             template_data = {
-                'functions': self.__exposed_funcs
+                'functions': self._exposed_funcs,
+                'autocommands': self._autocommands
                 }
 
             f.write( autogen_template.render(template_data) )
@@ -170,8 +185,9 @@ class IDEManager(object):
         """Call a function entry point from one of the plugins"""
         
         plugin_name, func = entry_point.split('_', 1)
+        class_name = 'BabelIDE_{}_Plugin'.format(plugin_name)
+
         for plugin in self.__plugins:
-            class_name = 'BabelIDE_{}_Plugin'.format(plugin_name)
             if plugin.__class__.__name__ == class_name:
                 getattr(plugin, func)()
 
