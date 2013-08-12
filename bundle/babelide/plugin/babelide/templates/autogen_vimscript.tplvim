@@ -37,3 +37,11 @@ augroup babelide
 {% endfor %}
 " Switch back to default group
 augroup END
+
+"=========================================================
+" Global mappings defined by plugins
+"=========================================================
+
+{% for mapping in mappings %}
+    {{ manager.call_entry_point('Base_build_mapping_to_python', mapping['mapping'], mapping['target']) }}
+{% endfor %}

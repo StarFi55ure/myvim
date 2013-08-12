@@ -10,10 +10,14 @@ from babelide.plugins.base import BabelIDE_Plugin
 from babelide.plugins.base import expose
 from babelide.plugins.base import autocommand
 
+from babelide.plugins.html5lib.chromeremotedebugger import ChromeRemoteDebugger
+
 from babelide.utils import random_string
 
 class BabelIDE_HTML5_Plugin(BabelIDE_Plugin):
     """This class implements HTML5 functionality"""
+
+    name = 'HTML5'
 
     def __init__(self, manager):
         """@todo: to be defined1 """
@@ -26,7 +30,11 @@ class BabelIDE_HTML5_Plugin(BabelIDE_Plugin):
                 '~/.config/google-chrome/{}'.format(random_string())
         self.__chrome_userdir = osp.expanduser(self.__chrome_userdir)
 
-        self.__chrome_remote_port = 9222
+        self._chrome_remote_port = 9222
+        
+
+        self._chrome_debugger = None
+
     
     def get_actions(self):
         """Get the list of all filetypes actions that can be performed
@@ -50,19 +58,42 @@ class BabelIDE_HTML5_Plugin(BabelIDE_Plugin):
          
         return actions
 
+    def get_mappings(self):
+        """Return the global key mappings defined by this plugin
+        :returns: @todo
+
+        """
+        mappings = []
+
+        return mappings
+
+    #################################################################
+    # Chrome Debugger entry poinst
+    #################################################################
+
     @expose
-    def open_remote_chrome_debug_session(self):
-        """ Open a remote chrome debug session as a subprocess"""
+    def debug_open_remote_debug_session(self):
+        """ Open a remote debug session"""
+
+        # Clear the buffer and open a new session
+        buf = vim.current.buffer
+        buf[:] = ['-> opening remote session']
 
         if not self.__remote_chrome_inst:
             self.__remote_chrome_inst = subprocess.Popen([self.__chrome_bin,
                 '--user-data-dir={}'.format(self.__chrome_userdir),
-                '--remote-debugging-port={}'.format(self.__chrome_remote_port)]
+                '--remote-debugging-port={}'.format(self._chrome_remote_port)]
                 )
+
+        # create a debug controller object
+        self._chrome_debugger = ChromeRemoteDebugger('localhost',
+                self._chrome_remote_port)
+
+        # show list of tab to select from
 
 
     @expose
-    def close_remote_chrome_debug_session(self):
+    def debug_close_remote_debug_session(self):
         """Close the open session
         :returns: @todo
 
@@ -75,7 +106,15 @@ class BabelIDE_HTML5_Plugin(BabelIDE_Plugin):
                 shutil.rmtree(self.__chrome_userdir)
 
     @expose
-    def save_to_remote_chrome(self):
+    def debug_chrome_tab_selected(self):
+        """A chrome tab was selected for debugging
+        :returns: @todo
+
+        """
+        pass
+
+    @expose
+    def debug_save_to_remote_chrome(self):
         """Save buffer contents to remote chrome
 
         """
@@ -88,6 +127,10 @@ class BabelIDE_HTML5_Plugin(BabelIDE_Plugin):
             print 'buffer contents: '
             print '\n'.join(lines)
 
+    ##############################################################
+    # These methods were for testing purposes
+    ##############################################################
+
     #@autocommand('CursorMovedI', ['*.vim', '*.py', '*.html'])
     def cursor_moved(self):
         '''Move cursor'''
@@ -97,4 +140,11 @@ class BabelIDE_HTML5_Plugin(BabelIDE_Plugin):
     def insert_leave(self):
         '''Leave insert mode'''
         print 'insert leave'
+
+    @expose
+    @autocommand('FileType', ['html'])
+    def file_type(self):
+        '''Run after setting filetype'''
+        print 'set the filetype to html :-)'
+
 
