@@ -2,6 +2,7 @@ import os
 import os.path as osp
 import sys
 import shutil
+import socket
 import subprocess
 import datetime
 import vim
@@ -13,6 +14,8 @@ from babelide.plugins.base import autocommand
 from babelide.plugins.html5lib.chromeremotedebugger import ChromeRemoteDebugger
 
 from babelide.utils import random_string
+from babelide.utils import writebuf
+from babelide.utils import wait_net_service
 
 class BabelIDE_HTML5_Plugin(BabelIDE_Plugin):
     """This class implements HTML5 functionality"""
@@ -34,6 +37,8 @@ class BabelIDE_HTML5_Plugin(BabelIDE_Plugin):
         
 
         self._chrome_debugger = None
+
+        self._nullfile = open('out.logging', 'w');
 
     
     def get_actions(self):
@@ -77,19 +82,30 @@ class BabelIDE_HTML5_Plugin(BabelIDE_Plugin):
 
         # Clear the buffer and open a new session
         buf = vim.current.buffer
-        buf[:] = ['-> opening remote session']
+        buf[:] = ['']
+        writebuf(buf, '-> opening remote session')
 
         if not self.__remote_chrome_inst:
             self.__remote_chrome_inst = subprocess.Popen([self.__chrome_bin,
                 '--user-data-dir={}'.format(self.__chrome_userdir),
-                '--remote-debugging-port={}'.format(self._chrome_remote_port)]
+                '--remote-debugging-port={}'.format(self._chrome_remote_port),
+                '--no-first-run',
+                '--enable-logging'],
+                stdout=self._nullfile,
+                stderr=subprocess.STDOUT
                 )
 
+        writebuf(buf, '-> waiting for chrome debug port to open...')
+        if not wait_net_service('localhost', self._chrome_remote_port, 30):
+            print 'Error waiting from chrome debug port to open'
+
         # create a debug controller object
+        writebuf(buf, '-> creating remote debugger')
         self._chrome_debugger = ChromeRemoteDebugger('localhost',
                 self._chrome_remote_port)
 
         # show list of tab to select from
+        self._chrome_debugger.show_tab_list()
 
 
     @expose

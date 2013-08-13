@@ -50,6 +50,7 @@ class BabelIDE_Plugin(object):
         """
         return '{}_{}'.format(self.name, funcname)
 
+
 class BabelIDE_Base_Plugin(BabelIDE_Plugin):
     """ Provides default functionality for the ide"""
 
