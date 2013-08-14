@@ -73,7 +73,7 @@ class BabelIDE_HTML5_Plugin(BabelIDE_Plugin):
         return mappings
 
     #################################################################
-    # Chrome Debugger entry poinst
+    # Chrome Debugger entry points
     #################################################################
 
     @expose
