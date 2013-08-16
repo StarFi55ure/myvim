@@ -38,7 +38,7 @@ class BabelIDE_HTML5_Plugin(BabelIDE_Plugin):
 
         self._chrome_debugger = None
 
-        self._nullfile = open('out.logging', 'w');
+        #self._nullfile = open('out.logging', 'w');
 
     
     def get_actions(self):
@@ -91,7 +91,7 @@ class BabelIDE_HTML5_Plugin(BabelIDE_Plugin):
                 '--remote-debugging-port={}'.format(self._chrome_remote_port),
                 '--no-first-run',
                 '--enable-logging'],
-                stdout=self._nullfile,
+                #stdout=self._nullfile,
                 stderr=subprocess.STDOUT
                 )
 
