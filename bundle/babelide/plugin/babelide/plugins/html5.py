@@ -6,6 +6,8 @@ import socket
 import subprocess
 import datetime
 import vim
+import json
+
 
 from babelide.plugins.base import BabelIDE_Plugin
 from babelide.plugins.base import expose
@@ -38,7 +40,9 @@ class BabelIDE_HTML5_Plugin(BabelIDE_Plugin):
 
         self._chrome_debugger = None
 
-        #self._nullfile = open('out.logging', 'w');
+        self._nullfile = open('/dev/null', 'w');
+
+        self._project_definition = None
 
     
     def get_actions(self):
@@ -72,6 +76,25 @@ class BabelIDE_HTML5_Plugin(BabelIDE_Plugin):
 
         return mappings
 
+    def load_project_definition(self):
+        """Load a project definition if one exists
+        :returns: @todo
+
+        """
+        if not self._project_definition:
+            projectfile = os.path.join(os.getcwd(), 'vimhtml5project.json')
+            if os.path.exists(projectfile):
+                with open(projectfile, 'r') as f:
+                    self._project_definition = json.load(f)
+
+    def save_project_definition(self):
+        """Save project definition to file
+        :returns: @todo
+
+        """
+        pass
+        
+
     #################################################################
     # Chrome Debugger entry points
     #################################################################
@@ -79,6 +102,12 @@ class BabelIDE_HTML5_Plugin(BabelIDE_Plugin):
     @expose
     def debug_open_remote_debug_session(self):
         """ Open a remote debug session"""
+        
+        self.load_project_definition() 
+
+        if not self._project_definition:
+            print 'HTML5 project definition needs to be created'
+            return 
 
         # Clear the buffer and open a new session
         buf = vim.current.buffer
@@ -91,7 +120,7 @@ class BabelIDE_HTML5_Plugin(BabelIDE_Plugin):
                 '--remote-debugging-port={}'.format(self._chrome_remote_port),
                 '--no-first-run',
                 '--enable-logging'],
-                #stdout=self._nullfile,
+                stdout=self._nullfile,
                 stderr=subprocess.STDOUT
                 )
 
@@ -102,13 +131,14 @@ class BabelIDE_HTML5_Plugin(BabelIDE_Plugin):
         # create a debug controller object
         writebuf(buf, '-> creating remote debugger')
         self._chrome_debugger = ChromeRemoteDebugger('localhost',
-                self._chrome_remote_port)
+                self._chrome_remote_port, self)
 
         # show list of tab to select from
         self._chrome_debugger.show_tab_list()
 
 
     @expose
+    @autocommand('VimLeavePre', ['*'])
     def debug_close_remote_debug_session(self):
         """Close the open session
         :returns: @todo
@@ -130,18 +160,20 @@ class BabelIDE_HTML5_Plugin(BabelIDE_Plugin):
         pass
 
     @expose
-    def debug_save_to_remote_chrome(self):
-        """Save buffer contents to remote chrome
+    @autocommand('BufWritePost', ['*.js'])
+    def debug_save_buffer(self):
+        """Insert the autocommands to link the buffer to the debugger objects in
+        the chrome debugger
+        :returns: @todo
 
         """
-    
-        if self.__remote_chrome_inst:
-            b = vim.current.buffer
+        buf = vim.current.buffer
 
-            lines = b[0:len(b)]
-
-            print 'buffer contents: '
-            print '\n'.join(lines)
+        if self._chrome_debugger:
+            if buf.name.endswith('js'):
+                self._chrome_debugger.debugger__save_buffer_to_remote()
+            elif buf.name.endswith('css'):
+                self._chrome_debugger.network__save_buffer_to_remote()
 
     ##############################################################
     # These methods were for testing purposes

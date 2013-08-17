@@ -6,6 +6,7 @@ import requests
 import pprint
 import json
 import threading
+import urlparse
 
 import websocket
 
@@ -15,12 +16,13 @@ from threading import Thread
 class BaseTab(object):
     """Base class to manage the debugger commands"""
 
-    def __init__(self):
+    def __init__(self, plugin):
         """Constructor """
         # only do local import to make sure we dont hit
         # cyclic import dependancy
         from babelide import BabelIDE_Manager as manager
         self._manager = manager
+        self._plugin = plugin
 
     def set_inqueue(self, inqueue):
         """Set the queue for incoming messages
@@ -53,7 +55,7 @@ class BaseTab(object):
                 callee = message['method'].replace('.', '_')
                 callee = callee.lower()
                 if hasattr(self, callee):
-                    getattr(self, callee)()
+                    getattr(self, callee)(message)
                 else:
                     errtxt = 'no function {} for {}'
 
@@ -75,9 +77,11 @@ class BaseTab(object):
 class DebuggerTab(BaseTab):
     """Manage the debugger commands"""
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         """Constructor"""
-        BaseTab.__init__(self)
+        BaseTab.__init__(self, *args, **kwargs)
+
+        self._scripts = {}
 
     def init(self):
         """Initialize tab
@@ -89,21 +93,88 @@ class DebuggerTab(BaseTab):
 
         self._outqueue.put(request)
 
+    def save_buffer_to_remote(self):
+        """Save the buffer contents to the remote instance
+
+        """
+        buf = vim.current.buffer
+        fullname = vim.eval('expand("%:p")')
+
+        data_to_save = None
+        for key, val in self._scripts.iteritems():
+            if fullname.endswith(key):
+                print 'saving buffer ', fullname
+                print val
+                data_to_save = val['params']
+
+        if data_to_save:
+            request = {}
+            request['id'] = 200
+            request['method'] = 'Debugger.setScriptSource'
+            request['params'] = {
+                'scriptId': data_to_save['scriptId'],
+                'scriptSource': '\n'.join(buf[:])
+            }
+
+            self._outqueue.put(request)
+
+
+    def debugger_scriptparsed(self, data):
+        """Process when a script has been loaded into chrome
+
+        :data: @todo
+        :returns: @todo
+
+        """
+        path = urlparse.urlparse(data['params']['url']).path
+        self._scripts[path] = data
+
+class NetworkTab(BaseTab):
+    """Class for network tab functionality"""
+
+    def __init__(self, *args, **kwargs):
+        """Constructor"""
+        BaseTab.__init__(self, *args, **kwargs)
+
+    def init(self):
+        """Initialize the network tab object
+        :returns: @todo
+
+        """
+        request = {}
+        request['id'] = 103
+        request['method'] = 'Network.enable'
+
+        self._outqueue.put(request)
+
+    def save_buffer_to_remoate(self):
+        """Force resource files to reload in browser
+        :returns: @todo
+
+        """
+        pass
+        
 
 class ChromeRemoteDebugger(object):
     """Main chrome debugger object"""
 
-    def __init__(self, host, port):
+    def __init__(self, host, port, plugin=None):
         """Constructor"""
+        self._plugin = plugin
         self._host = 'http://{}'.format(host)
         self._port = port
 
         self._debugger_inqueue = Queue()
+        self._network_inqueue = Queue()
         self._outqueue = Queue()
 
-        self._debuggertab = DebuggerTab()
+        self._debuggertab = DebuggerTab(self._plugin)
         self._debuggertab.set_inqueue(self._debugger_inqueue)
         self._debuggertab.set_outqueue(self._outqueue)
+
+        self._networktab = NetworkTab(self._plugin)
+        self._networktab.set_inqueue(self._network_inqueue)
+        self._networktab.set_outqueue(self._outqueue)
 
         # get basic configs from browser
         r = requests.get('{}:{}/json'.format(self._host, self._port))
@@ -151,6 +222,8 @@ class ChromeRemoteDebugger(object):
             component, method = message['method'].split('.')
             if component.lower() == 'debugger':
                 self._debugger_inqueue.put(message)
+            elif component.lower() == 'network':
+                self._network_inqueue.put(message)
 
         # check if a response message
         if 'id' in message:
@@ -168,20 +241,16 @@ class ChromeRemoteDebugger(object):
         request['id'] = 100
         request['method'] = 'Page.navigate'
         request['params'] = {
-            'url': 'http://cmsv2.vulcan.local'
+            'url': 'http://localhost:5000'
         }
         s = json.dumps(request)
         ws.send(s)
 
         self._debuggertab.init()
+        self._networktab.init()
+
         self._debuggertab.process_messages()
-
-        #request = {}
-        #request['id'] = 103
-        #request['method'] = 'Network.enable'
-
-        #s = json.dumps(request)
-        #ws.send(s)
+        self._networktab.process_messages()
 
 
     def show_tab_list(self):
@@ -190,6 +259,29 @@ class ChromeRemoteDebugger(object):
 
         """
         return ''
+
+    def __getattr__(self, name):
+        """Custom attribute lookup for debug functionality
+        """
+        if name.index('__') < 0:
+            raise AttributeError
+
+        tab, func = name.split('__', 1)
+
+        debugtabs = {
+            'debugger': self._debuggertab,
+            'network': self._networktab
+        }
+
+        if tab in debugtabs:
+            t = debugtabs[tab]
+            if hasattr(t, func):
+                return getattr(t, func)
+            else:
+                raise AttributeError
+
+
+
 
         
         
