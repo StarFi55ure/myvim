@@ -7,6 +7,8 @@ import vim
 
 from babelide.tools.wizard import Wizard
 
+import gtk
+
 def expose(func, *args, **kwargs):
     ''' Decorator to mark a method as exposed to the outside world'''
     func.__exposed__ = True 
@@ -132,8 +134,17 @@ class BabelIDE_Base_Plugin(BabelIDE_Plugin):
         :returns: @todo
 
         """
-        # create new tab
+        if int(vim.eval('has("gui_running")')):
+            print 'gui running'
+            window = gtk.Window()
+            label = gtk.Label("Hello World");
 
+            window.add(label)
+
+            window.resize(640, 480)
+            window.show_all()
+
+        return 
         vim.command('tabnew')
 
         w = Wizard('Debugger Session Types:', self._manager)
