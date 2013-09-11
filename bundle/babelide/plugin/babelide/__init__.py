@@ -53,9 +53,13 @@ class IDEManager(object):
             self.exit_on_init()
 
 
+        self.tmpl_loader = Environment(loader=PackageLoader('babelide'),
+                trim_blocks=True, lstrip_blocks=True)
+
         # setup global data structures
-        self.__plugins = []
-        self.__actions = {}
+        self._plugins = []
+        self._actions = {}
+        self._mappings = []
 
         # load ide plugins
         self._loadBase()
@@ -109,13 +113,13 @@ class IDEManager(object):
 
     def _loadBase(self):
         """Load the base functionality for the IDE"""
-        self.__plugins.append( BabelIDE_Base_Plugin(self) )
+        self._plugins.append( BabelIDE_Base_Plugin(self) )
 
     def _loadHTML5(self):
         """Load the html5 plugin
 
         """
-        self.__plugins.append( BabelIDE_HTML5_Plugin(self) )
+        self._plugins.append( BabelIDE_HTML5_Plugin(self) )
 
     def _accumulate_plugin_functions(self):
         """Accumulate the public functions that will be exposed to vimscript for
@@ -123,18 +127,15 @@ class IDEManager(object):
 
         """
         all_funcs = {}
-        for plugin in self.__plugins:
-            plugin_name = plugin.__class__.__name__
-            plugin_name = plugin_name.replace('BabelIDE_', '')
-            plugin_name = plugin_name.replace('_Plugin', '')
+        for plugin in self._plugins:
 
             def CC_func_name(fname):
                 t = fname.replace('_','-').capitalize()
-                func_name = 'Babel{}{}'.format(plugin_name,t)
+                func_name = 'Babel{}{}'.format(plugin.name,t)
                 func_name = re.sub('(-|^)([a-z])', lambda p: p.group(2).upper(),
                         func_name)
 
-                entry_point = '{}_{}'.format(plugin_name, fname)
+                entry_point = '{}_{}'.format(plugin.name, fname)
                 return '{}:{}'.format(func_name, entry_point)
 
             all_funcs.update( { CC_func_name(x[0]):x[1] 
@@ -151,13 +152,14 @@ class IDEManager(object):
         """Accumulate key mappings from plugin objects
 
         """
-        pass
+        for plugin in self._plugins:
+            self._mappings.extend(plugin.get_mappings())
 
     def _accumulate_plugin_actions(self):
         """Accumulate that the plugins expose
         """
-        for plugin in self.__plugins:
-            self.__actions.update(plugin.get_actions())
+        for plugin in self._plugins:
+            self._actions.update(plugin.get_actions())
 
     def _build_wrapper_file(self):
         """Build the vimscript wrapper file to expose all the functionality
@@ -171,29 +173,34 @@ class IDEManager(object):
 
         with open(gen_vimscript, 'w') as f:
 
-            env = Environment(loader=PackageLoader('babelide'))
-            autogen_template = env.get_template('autogen_vimscript.tplvim')
+            autogen_template = self.tmpl_loader.get_template('autogen_vimscript.tplvim')
 
             template_data = {
+                'manager': self,
                 'functions': self._exposed_funcs,
-                'autocommands': self._autocommands
+                'autocommands': self._autocommands,
+                'mappings': self._mappings
                 }
 
             f.write( autogen_template.render(template_data) )
 
-    def call_entry_point(self, entry_point):
+    def call_entry_point(self, entry_point, *args):
         """Call a function entry point from one of the plugins"""
         
         plugin_name, func = entry_point.split('_', 1)
         class_name = 'BabelIDE_{}_Plugin'.format(plugin_name)
 
-        for plugin in self.__plugins:
+        return_val = None
+
+        for plugin in self._plugins:
             if plugin.__class__.__name__ == class_name:
-                getattr(plugin, func)()
+                return_val = getattr(plugin, func)(*args)
+        
+        return return_val
 
     def get_action_list(self, filetype):
         """ Return the list of actions for a particular filetype"""
-        return self.__actions.get(filetype, {})
+        return self._actions.get(filetype, {})
 
 
 

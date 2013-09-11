@@ -24,6 +24,7 @@ command! -complete=command -nargs=+ BabelIDE call _BabelIDE(<args>)
 
 " Make sure we are inside an autocommand group
 augroup babelide
+au!
 {% for func_name,func in autocommands.iteritems() %}
     {% set fname, entry_point = func_name.split(':') %}
     {% for acmd in func.__autocmd__ %}
@@ -37,3 +38,11 @@ augroup babelide
 {% endfor %}
 " Switch back to default group
 augroup END
+
+"=========================================================
+" Global mappings defined by plugins
+"=========================================================
+
+{% for mapping in mappings %}
+    {{ manager.call_entry_point('Base_build_mapping_to_python', mapping['mapping'], mapping['target']) }}
+{% endfor %}
