@@ -21,4 +21,6 @@ fi
 echo "Linking `pwd` to \$HOME/.vim"
 ln -s `pwd` $HOME/.vim
 
+root_dir=`pwd`
+
 
