@@ -1,0 +1,15 @@
+VimTAP	VimTAP.txt	/*VimTAP*
+VimTAPLicense	VimTAP.txt	/*VimTAPLicense*
+vimtap#BailOut	VimTAP.txt	/*vimtap#BailOut*
+vimtap#Diag	VimTAP.txt	/*vimtap#Diag*
+vimtap#Fail	VimTAP.txt	/*vimtap#Fail*
+vimtap#Is	VimTAP.txt	/*vimtap#Is*
+vimtap#Isnt	VimTAP.txt	/*vimtap#Isnt*
+vimtap#Like	VimTAP.txt	/*vimtap#Like*
+vimtap#Ok	VimTAP.txt	/*vimtap#Ok*
+vimtap#Pass	VimTAP.txt	/*vimtap#Pass*
+vimtap#Plan	VimTAP.txt	/*vimtap#Plan*
+vimtap#SetOutputFile	VimTAP.txt	/*vimtap#SetOutputFile*
+vimtap#Skip	VimTAP.txt	/*vimtap#Skip*
+vimtap#Todo	VimTAP.txt	/*vimtap#Todo*
+vimtap#Unlike	VimTAP.txt	/*vimtap#Unlike*
