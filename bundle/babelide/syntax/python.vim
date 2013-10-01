@@ -43,5 +43,5 @@ hi pythonDecorator          ctermfg=33 guifg=#0087FF
 
 hi pythonCommentSingle      ctermfg=184 guifg=#D7D700
 
-let b:current_syntax = "pythonj"
+let b:current_syntax = "python"
 

@@ -2,12 +2,16 @@ import os
 import os.path as osp
 import sys
 import datetime
+import threading
+import functools
 
 import vim
 
-from babelide.tools.wizard import Wizard
+from PySide.QtCore import *
+from PySide.QtGui import *
 
-import gtk
+from babelide.plugins.baselib.DebuggerSelector import DebuggerSelector
+
 
 def expose(func, *args, **kwargs):
     ''' Decorator to mark a method as exposed to the outside world'''
@@ -43,14 +47,29 @@ class BabelIDE_Plugin(object):
         """Constructor """
         self._manager = manager
 
-    def get_entry_point_string(self, funcname):
+    def get_entry_point_string(self, funcname, plugin=None):
         """Build an entry point string for use in vimscript
 
         :funcname: @todo
         :returns: @todo
 
         """
-        return '{}_{}'.format(self.name, funcname)
+        if plugin:
+            ep_name = '{}_{}'.format(plugin, funcname)
+        else:
+            ep_name = '{}_{}'.format(self.name, funcname)
+        return ep_name
+
+    def call_entry_point(self, funcname, plugin=None):
+        """Call an entry point
+
+        :plugin: @todo
+        :funcname: @todo
+        :returns: @todo
+
+        """
+        ep = self.get_entry_point_string(funcname, plugin)
+        self._manager.call_entry_point(ep)
 
 
 class BabelIDE_Base_Plugin(BabelIDE_Plugin):
@@ -85,7 +104,7 @@ class BabelIDE_Base_Plugin(BabelIDE_Plugin):
         mappings = []
         m = {
             'mapping': 'nnoremap <leader>id',
-            'target' : self.get_entry_point_string('start_debugger_session')
+            'target' : self.get_entry_point_string('select_debugger_session')
         }
         mappings.append(m)
 
@@ -129,30 +148,26 @@ class BabelIDE_Base_Plugin(BabelIDE_Plugin):
     ################################################################
 
     @expose
-    def start_debugger_session(self):
+    def select_debugger_session(self):
         """Show a list of debugger types and start a session
         :returns: @todo
 
         """
         if int(vim.eval('has("gui_running")')):
-            print 'gui running'
-            window = gtk.Window()
-            label = gtk.Label("Hello World");
 
-            window.add(label)
+            if QApplication.instance():
+                app = QApplication.instance()
+            else:
+                app = QApplication(sys.argv)
 
-            window.resize(640, 480)
-            window.show_all()
+            ds = DebuggerSelector()
+            ds.show()
 
-        return 
-        vim.command('tabnew')
-
-        w = Wizard('Debugger Session Types:', self._manager)
-
-        w.add_option('Chrome Debugger', 'HTML5_debug_open_remote_debug_session')
-        w.add_option('Python (Remote)', 'Python_debug_open_remote_session')
-        w.add_option('Python', 'Python_debug_open_session')
-
-        w.show_list()
+            app.exec_()
+            if ds.returnval:
+                {
+                    'php': functools.partial(self.call_entry_point,
+                        'start_debug_session', 'PHP')
+                }[ds.returnval['debugger']]()
 
 

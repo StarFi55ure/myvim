@@ -8,7 +8,10 @@ setup(
     install_requires = [
         'requests',
         'jinja2',
-        'websocket-client'
+        'websocket-client',
+        'tornado',
+        'cython',
+        'lxml'
         ]
 )
 

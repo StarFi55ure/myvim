@@ -17,6 +17,7 @@ from babelide.utils import install_package
 
 from babelide.plugins.base import BabelIDE_Base_Plugin
 from babelide.plugins.html5 import BabelIDE_HTML5_Plugin
+from babelide.plugins.php import BabelIDE_PHP_Plugin
 
 class IDEManager(object):
     """Docstring for BabelIDE_Manager """
@@ -29,10 +30,11 @@ class IDEManager(object):
 
         """
 
-        self.__basedir = babelide_basedir
+        # setup global paths
+        self.basedir = babelide_basedir
 
         # setup workarea
-        self.__workarea = osp.join(self.__basedir, 'workarea')
+        self.__workarea = osp.join(self.basedir, 'workarea')
         if not osp.exists(self.__workarea):
             os.makedirs(self.__workarea)
 
@@ -64,6 +66,7 @@ class IDEManager(object):
         # load ide plugins
         self._loadBase()
         self._loadHTML5()
+        self._loadPHP()
 
         # accumulate data for wrapper generation
         self._accumulate_plugin_functions()
@@ -120,6 +123,13 @@ class IDEManager(object):
 
         """
         self._plugins.append( BabelIDE_HTML5_Plugin(self) )
+
+    def _loadPHP(self):
+        """Load the PHP plugin
+        :returns: @todo
+
+        """
+        self._plugins.append( BabelIDE_PHP_Plugin(self) )
 
     def _accumulate_plugin_functions(self):
         """Accumulate the public functions that will be exposed to vimscript for
