@@ -1,10 +1,4 @@
-#!/bin/bash
-
-# first sort out the git inits and updates
-
-git checkout master
-git submodule update --init
-git submodule foreach --recursive git checkout master
+#!/bin/zsh
 
 # create vimrc
 if [ -e $HOME/.vimrc ]; then

@@ -1,5 +1,5 @@
 
 
 all:
-	/bin/bash setup.sh
+	./setup.zsh
 
