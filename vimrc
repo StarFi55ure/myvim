@@ -41,7 +41,7 @@ map j <M-j>
 noremap <M-k> <Esc><Esc><Esc><Esc><C-W>k<C-W>_
 noremap <M-j> <Esc><Esc><Esc><Esc><C-W>j<C-W>_
 
-noremap <C-p> :Unite file_rec buffer<CR>
+noremap <C-p> :Unite file_mru file_rec file buffer<CR>
 
 "========================================
 "force myself to use vim properly
@@ -58,3 +58,4 @@ imap <Right> <nop>
 
 autocmd VimEnter * wincmd p
 
+let g:unite_enable_start_insert = 1

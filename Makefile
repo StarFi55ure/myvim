@@ -8,3 +8,6 @@ setup:
 
 install-infrastructure:
 	./install_infrastructure.zsh
+
+clear-workarea:
+	rm -fr bundle/babelide/plugin/workarea/*

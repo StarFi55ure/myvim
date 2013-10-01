@@ -8,6 +8,8 @@ import datetime
 import vim
 import json
 
+from lxml import etree
+from lxml import objectify
 
 from babelide.plugins.base import BabelIDE_Plugin
 from babelide.plugins.base import expose
@@ -111,7 +113,16 @@ class BabelIDE_PHP_Plugin(BabelIDE_Plugin):
 
         """
         if self._xdebug_server:
-            self._xdebug_server.send_status()
+            data = self._xdebug_server.run_command("status")
+            print etree.tostring(data)
+
+    @expose
+    def get_feature_statuses(self):
+        """@todo: Docstring for get_feature_statuses.
+        :returns: @todo
+
+        """
+        pass
 
 
     ##############################################################

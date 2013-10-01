@@ -2,6 +2,7 @@ import os
 import sys
 import threading
 
+from Queue import Queue
 from tornado.tcpserver import TCPServer
 from tornado.ioloop import IOLoop
 from tornado.iostream import IOStream
@@ -19,6 +20,10 @@ class XDebugServer(TCPServer):
         super(XDebugServer, self).__init__(io_loop=self.ioloop)
 
         self.listen(9000)
+
+        # this is for cross thread communication
+        self.inport = Queue()
+        self.outport = Queue()
 
         self._xdebug_connection = None
 
@@ -42,16 +47,15 @@ class XDebugServer(TCPServer):
         :returns: @todo
 
         """
-        self._xdebug_connection = XDebugConnection(stream, address)
-        self._xdebug_connection.process_response()
+        self._xdebug_connection = XDebugConnection(self, stream, address)
 
-    def send_status(self):
+    def run_command(self, command, data=None):
         """Send status
         :returns: @todo
 
         """
-        self._xdebug_connection.send_command("status\0")
-        self._xdebug_connection.process_response()
+        self.inport.put("{} -i 1\0".format(str(command)))
+        return self.outport.get()
         
 
     def stop(self):
