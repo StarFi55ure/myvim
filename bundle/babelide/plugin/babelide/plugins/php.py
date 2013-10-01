@@ -122,7 +122,17 @@ class BabelIDE_PHP_Plugin(BabelIDE_Plugin):
         :returns: @todo
 
         """
-        pass
+        features = [
+            'language_supports_threads',
+            'language_name',
+            'language_version'
+        ]
+
+        if self._xdebug_server:
+            for f in features:
+                cmd = 'feature_get -n {}'.format(f)
+                data = self._xdebug_server.run_command(cmd)
+                print etree.tostring(data)
 
 
     ##############################################################
