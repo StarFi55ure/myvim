@@ -1,0 +1,19 @@
+snippet symclass "Create a symphony class"
+<?php
+
+namespace ${1:`!p 
+import os
+import re
+
+ns = path.replace(os.getcwd(), '')
+ns = re.sub(r'^/\w+(.*)', r'\1', ns)
+ns = re.sub(r'/', r'\\', os.path.dirname(ns))
+snip.rv = ns
+`}
+
+class ${2:`!v Filename('', 'myClass')`}
+{
+    ${3}
+}
+?>
+endsnippet
