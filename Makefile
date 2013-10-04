@@ -1,6 +1,6 @@
 
 
-all: install_infrastructure setup
+all: install-infrastructure setup
 	./setup.zsh
 
 setup:
