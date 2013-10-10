@@ -5,8 +5,16 @@
 
 function! _BabelIDE(entry_point)
     exec g:_uspy "BabelIDE_Manager.call_entry_point('" . a:entry_point . "')"
+    if (exists('b:babel_return_val'))
+        return b:babel_return_val
+    else 
+        return
 endfunction
 command! -complete=command -nargs=+ BabelIDE call _BabelIDE(<args>)
+
+function! _BabelIDEAcceptAction(mode, str)
+    return _BabelIDE("Base_accept_action")
+endfunction
 
 
 "=========================================================
