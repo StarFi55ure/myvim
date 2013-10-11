@@ -24,7 +24,7 @@ inoremap jj <Esc>
 
 set t_Co=256
 
-colorscheme tango
+colorscheme babelide
 
 "========================================
 " My mappings
