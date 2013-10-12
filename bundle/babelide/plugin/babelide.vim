@@ -74,6 +74,10 @@ exec "source " . g:BabelIDEBaseDir . '/workarea/autogen_vimscript.vim'
 " Setup global plugin key bindings
 "==================================================================
 
+"==================================================================
+" Setup commands
+"==================================================================
+command! -complete=command CtrlPActions call ctrlp#init(3)
 
 
 let did_BabelIDE_vim=1

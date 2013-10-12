@@ -9,11 +9,42 @@ ns = path.replace(os.getcwd(), '')
 ns = re.sub(r'^/\w+(.*)', r'\1', ns)
 ns = re.sub(r'/', r'\\', os.path.dirname(ns))
 snip.rv = ns
-`}
+`};
 
 class ${2:`!v Filename('', 'myClass')`}
 {
-    ${3}
+	public function __construct(${3:arg1} {
+	}
+
+    ${4}
 }
 ?>
 endsnippet
+
+snippet symclassmodel "Create a symphony model class"
+<?php
+
+namespace ${1:`!p 
+import os
+import re
+
+print path
+print os.getcwd()
+
+ns = path.replace(os.getcwd(), '')
+print ns
+ns = re.sub(r'^/?\w+(.*)', r'\1', ns)
+ns = re.sub(r'/', r'\\', os.path.dirname(ns))
+snip.rv = ns
+`};
+
+class ${2:`!v Filename('', 'myClass')`} extends BaseModel
+{
+	public function __construct(${3:arg1}) {
+	}
+
+    ${4}
+}
+?>
+endsnippet
+

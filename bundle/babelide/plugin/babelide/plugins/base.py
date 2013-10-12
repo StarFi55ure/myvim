@@ -171,3 +171,21 @@ class BabelIDE_Base_Plugin(BabelIDE_Plugin):
                 }[ds.returnval['debugger']]()
 
 
+    @expose
+    def list_actions(self):
+        """Select the chrome debugger
+        :returns: @todo
+
+        """
+        retval = ['chrome debugger', 'python debugger']
+        vim.command('let b:babel_return_val = {}'.format(retval))
+
+    @expose
+    def accept_action(self):
+        """@todo: Docstring for accept_action.
+        :returns: @todo
+
+        """
+        vim.command('call ctrlp#exit()')
+
+
