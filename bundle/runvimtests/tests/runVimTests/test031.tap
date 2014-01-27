@@ -1,0 +1,5 @@
+1..3
+ok 1 - all right
+ok 2 - 1 == 1
+ok 3 - matches
+# Some diagnostic message.

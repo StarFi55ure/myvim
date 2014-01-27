@@ -1,0 +1,11 @@
+snippet "table\(([\d]+)\)" "XHTML <table> (babelide)" r
+<table id="${1}">
+    <thead>
+        `!p for i in range(int(match.group(1))):
+            snip.rv += '<tr><th>${}</th></tr>\n'.format(i + 1)
+        ` 
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+endsnippet
