@@ -38,11 +38,14 @@ hi pythonSelfKeyword        ctermfg=172 guifg=#D78700
 
 hi pythonStringSingleQuote  ctermfg=41 guifg=#00D75F 
 hi pythonStringDoubleQuote  ctermfg=41 guifg=#00D75F 
+hi pythonString             ctermfg=41 guifg=#00D75F 
 hi pythonStringTrippleQuote ctermfg=47 guifg=#00FF5F
+hi pythonRawString          ctermfg=41 guifg=#00D75F 
 
 hi pythonDecorator          ctermfg=33 guifg=#0087FF
 
 hi pythonCommentSingle      ctermfg=184 guifg=#D7D700
+hi pythonComment            ctermfg=184 guifg=#D7D700
 
 delcommand HiLink
 
