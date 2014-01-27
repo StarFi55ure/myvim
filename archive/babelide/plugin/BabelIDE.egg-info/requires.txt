@@ -1,6 +1,0 @@
-requests
-jinja2
-websocket-client
-tornado
-cython
-lxml
