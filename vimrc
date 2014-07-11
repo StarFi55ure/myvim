@@ -30,30 +30,28 @@ set encoding=utf-8
 " My mappings
 "========================================
 
-if has('gui_running')
-    map <C-C> :
-    map <F2> :NERDTreeToggle<CR>
-    map <F3> :NERDTreeFind<CR>
+map <C-C> :
+map <F2> :NERDTreeToggle<CR>
+map <F3> :NERDTreeFind<CR>
 
-    map k <M-k>
-    map j <M-j>
+map k <M-k>
+map j <M-j>
 
-    noremap <M-k> <Esc><Esc><Esc><Esc><C-W>k<C-W>_
-    noremap <M-j> <Esc><Esc><Esc><Esc><C-W>j<C-W>_
+noremap <M-k> <Esc><Esc><Esc><Esc><C-W>k<C-W>_
+noremap <M-j> <Esc><Esc><Esc><Esc><C-W>j<C-W>_
 
-    "========================================
-    "force myself to use vim properly
-    "========================================
-    map <Up> <nop>
-    map <Down> <nop>
-    map <Left> <nop>
-    map <Right> <nop>
+"========================================
+"force myself to use vim properly
+"========================================
+map <Up> <nop>
+map <Down> <nop>
+map <Left> <nop>
+map <Right> <nop>
 
-    imap <Up> <nop>
-    imap <Down> <nop>
-    imap <Left> <nop>
-    imap <Right> <nop>
-endif
+imap <Up> <nop>
+imap <Down> <nop>
+imap <Left> <nop>
+imap <Right> <nop>
 "========================================
 " CtrlP settings
 "========================================
