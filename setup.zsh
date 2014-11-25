@@ -1,5 +1,11 @@
 #!/bin/zsh
 
+platform=`uname`
+
+if [[ $platform == 'Darwin' ]]; then
+    alias readlink=greadlink
+fi
+
 # create vimrc
 if [ -e $HOME/.vimrc ]; then
     rm -f $HOME/.vimrc
