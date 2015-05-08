@@ -4,7 +4,7 @@ if has("unix")
         set guifont=Terminus\ (TTF)\ Bold:h16
         set noantialias
     else
-        set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 10
+        set guifont=Inconsolata\ for\ Powerline\ Medium\ 12
     endif
 endif
 
