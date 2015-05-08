@@ -1,8 +1,9 @@
 
 if has("unix")
     if has("gui_macvim")
-        set guifont=Terminus\ (TTF)\ Bold:h16
-        set noantialias
+        "set guifont=Terminus\ (TTF)\ Bold:h16
+        set guifont=Inconsolata-g\ for\ Powerline:h14
+        set antialias
     else
         set guifont=Inconsolata\ for\ Powerline\ Medium\ 12
     endif
