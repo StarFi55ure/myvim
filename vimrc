@@ -1,8 +1,30 @@
-call pathogen#infect()
-call pathogen#helptags()
 
 syntax on
 filetype plugin indent on
+
+" ========================================
+" Install Plugins
+" ========================================
+
+call plug#begin('~/.vim/bundle')
+
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'easymotion/vim-easymotion'
+Plug 'tpope/vim-fugitive'
+Plug 'scrooloose/nerdtree'
+Plug 'Lokaltog/vim-powerline'
+Plug 'tpope/vim-surround'
+Plug 'flazz/vim-colorschemes'
+Plug 'ekalinin/Dockerfile.vim'
+Plug 'davidhalter/jedi-vim'
+
+Plug '~/.vim/bundle/jupakevim'
+
+call plug#end()
+
+" ========================================
+" Setup main settings
+" ========================================
 
 set shiftwidth=4
 set tabstop=4
@@ -71,6 +93,6 @@ autocmd VimEnter * wincmd p
 "=========================================
 " Setup powerline
 "=========================================
-set rtp+=~/.myvim/bundle/powerline/powerline/bindings/vim
+"set rtp+=~/.myvim/bundle/powerline/powerline/bindings/vim
 
 
