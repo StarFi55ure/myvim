@@ -8,7 +8,7 @@ filetype plugin indent on
 
 call plug#begin('~/.vim/bundle')
 
-Plug 'ctrlpvim/ctrlp.vim'
+Plug 'kien/ctrlp.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree'
@@ -77,6 +77,8 @@ imap <Right> <nop>
 "========================================
 " CtrlP settings
 "========================================
+
+map <C-p> :CtrlP
 
 let g:ctrlp_match_window = 'bottom:order:btt,max:25'
 let g:ctrlp_working_path_mode = 'a'
