@@ -17,7 +17,7 @@ set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
 
-if has("gui_running")
-    set lines=999 columns=999
-endif
+"if has("gui_running")
+"    set lines=999 columns=999
+"endif
 
