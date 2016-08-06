@@ -9,16 +9,12 @@ filetype plugin indent on
 call plug#begin('~/.vim/bundle')
 
 Plug 'kien/ctrlp.vim'
-Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree'
-Plug 'Lokaltog/vim-powerline'
 Plug 'tpope/vim-surround'
 Plug 'flazz/vim-colorschemes'
-Plug 'ekalinin/Dockerfile.vim'
-Plug 'davidhalter/jedi-vim'
-
 Plug '~/.vim/bundle/jupakevim'
+Plug '~/.vim/bundle/vim-carto'
 
 call plug#end()
 
