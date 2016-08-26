@@ -1,7 +1,7 @@
 
 if has("unix")
     if has("gui_running")
-        set guifont=Liberation\ Mono\ Bold\ 14
+        set guifont=Liberation\ Mono\ 14
         set antialias
     else
         set guifont=Inconsolata\ for\ Powerline\ Medium\ 12
