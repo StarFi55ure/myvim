@@ -1,0 +1,6 @@
+set hlsearch
+set incsearch
+set ignorecase
+
+nmap gi :action GotoImplementation<CR>
+

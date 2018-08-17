@@ -20,6 +20,13 @@ fi
 gvimrc_file=`readlink -f gvimrc`
 ln -s $gvimrc_file $HOME/.gvimrc
 
+# ideavimrc
+if [ -e $HOME/.ideavimrc ]; then
+    rm -f $HOME/.ideavimrc
+fi
+ideavimrc_file=`readlink -f ideavimrc`
+ln -s $ideavimrc_file $HOME/.ideavimrc
+
 # link vim directory
 if [ -d $HOME/.vim ]; then
     rm -fr $HOME/.vim
