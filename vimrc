@@ -12,10 +12,10 @@ Plug 'kien/ctrlp.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-surround'
-Plug 'exu/pgsql.vim'
 Plug 'flazz/vim-colorschemes'
 Plug '~/.vim/bundle/jupakevim'
 Plug '~/.vim/bundle/vim-carto'
+Plug 'vimwiki/vimwiki'
 
 call plug#end()
 
@@ -88,6 +88,13 @@ let g:ctrlp_extensions = ['ideactions']
 nnoremap <leader>ia :CtrlPActions<CR>
 
 autocmd VimEnter * wincmd p
+
+"=========================================
+" Vimwiki Settings
+"=========================================
+
+let g:vimwiki_list = [{'path': '~/Dropbox/vimwiki/', 'syntax': 'markdown', 'ext': 'md'}]
+
 
 "=========================================
 " Setup powerline
