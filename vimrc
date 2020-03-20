@@ -14,8 +14,9 @@ Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-surround'
 Plug 'flazz/vim-colorschemes'
 Plug '~/.vim/bundle/jupakevim'
-Plug '~/.vim/bundle/vim-carto'
+Plug 'nelsonjchen/vim-carto'
 Plug 'vimwiki/vimwiki'
+Plug 'sirtaj/vim-openscad'
 
 call plug#end()
 
