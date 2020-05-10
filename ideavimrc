@@ -4,3 +4,4 @@ set ignorecase
 
 nmap gi :action GotoImplementation<CR>
 
+set ideajoin
