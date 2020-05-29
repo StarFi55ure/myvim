@@ -3,10 +3,15 @@ if has("unix")
     if has("gui_running")
         set guifont=Inconsolata\ Bold\ 14
         set antialias
+        
+        autocmd GUIEnter * set vb t_vb=
     else
         set guifont=Inconsolata\ Medium\ 12
     endif
 endif
+
+set noerrorbells
+set vb t_vb=
 
 """"""""""""""""""""""""""""""""""""""""""""""
 " setup the gui options

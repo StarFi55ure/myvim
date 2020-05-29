@@ -2,6 +2,16 @@
 syntax on
 filetype plugin indent on
 
+set noerrorbells
+set belloff=all
+
+if has('win32') || has('win64')
+    set runtimepath-=~/vimfiles
+    set runtimepath^=~/.vim
+    set runtimepath-=~/vimfiles/after
+    set runtimepath+=~/.vim/after
+endif
+
 " ========================================
 " Install Plugins
 " ========================================
