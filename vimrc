@@ -18,6 +18,7 @@ endif
 
 call plug#begin('~/.vim/bundle')
 
+Plug 'vim-airline/vim-airline'
 Plug 'kien/ctrlp.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree'
