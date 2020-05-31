@@ -5,6 +5,21 @@
         - **.PATCH**: Pull Request Title (PR Author) [PR Number](Link to PR)
 -->
 #### 6.7
+- **.15**: Add curly braces to the list of characters to be escaped. (PhilRunninger) [#1128](https://github.com/preservim/nerdtree/pull/1128)
+- **.14**: Use backward-compatible `nerdtree#and()` in one place that was missed. (PhilRunninger) [#1134](https://github.com/preservim/nerdtree/pull/1134)
+- **.13**: `cmd.exe /c start "" <filename>` for windows default viewer support. (J. Altayó) [#1130](https://github.com/preservim/nerdtree/pull/1130)
+- **.12**: Fixed a bug that caused the file-tree construction to slow down significantly. (Eugenij-W) [#1126](https://github.com/preservim/nerdtree/pull/1126)
+- **.11**: Fix exception in NERDTreeFind (on windows OS and If the file is located in the root directory of the disk) (Eugenij-W) [#1122](https://github.com/preservim/nerdtree/pull/1122)
+- **.10**: Do not consider the tree root to be "cascadable". (lifecrisis) [#1120](https://github.com/preservim/nerdtree/pull/1120)
+- **.9**: Force `:NERDTreeFocus` to allow events to be fired when switching windows. (PhilRunninger) [#1118](https://github.com/preservim/nerdtree/pull/1118)
+- **.8**: Fix example code for the `NERDTreeAddKeyMap()` function. (PhilRunninger) [#1116](https://github.com/preservim/nerdtree/pull/1116)
+- **.7**: Put `'%'` argument in `bufname()` for backwards compatibility. (PhilRunninger) [#1105](https://github.com/preservim/nerdtree/pull/1105)
+- **.6**: If a file's already open in the window, don't edit it again. (PhilRunninger) [#1103](https://github.com/preservim/nerdtree/pull/1103)
+- **.5**: Prevent unneeded tree creation in `:NERDTreeToggle[VCS] <path>` (PhilRunninger) [#1101](https://github.com/preservim/nerdtree/pull/1101)
+- **.4**: Add missing calls to the `shellescape()` function (lifecrisis) [#1099](https://github.com/preservim/nerdtree/pull/1099)
+- **.3**: Fix vsplit to not open empty buffers when opening previously closed file (AwkwardKore) [#1098](https://github.com/preservim/nerdtree/pull/1098)
+- **.2**: Fix infinity loop (on winvim) in FindParentVCSRoot (Eugenij-W) [#1095](https://github.com/preservim/nerdtree/pull/1095)
+- **.1**: File Move: Escape existing directory name when looking for open files. (PhilRunninger) [#1094](https://github.com/preservim/nerdtree/pull/1094)
 - **.0**: Open the parent directory when revealing a non-existent file with :NERDTreeFind (bouk) [#1090](https://github.com/preservim/nerdtree/pull/1090)
 #### 6.6
 - **.1**: [add] How to install using dein.vim (kazukazuinaina) [#1087](https://github.com/preservim/nerdtree/pull/1087)
