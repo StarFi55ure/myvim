@@ -10,6 +10,15 @@ if has('win32') || has('win64')
     set runtimepath^=~/.vim
     set runtimepath-=~/vimfiles/after
     set runtimepath+=~/.vim/after
+
+    set backup
+    set dir=$TMP
+    set backupdir=$TMP
+    set directory=$TMP
+    set noundofile
+
+    set backspace=2
+    set backspace=indent,eol,start
 endif
 
 " ========================================

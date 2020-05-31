@@ -1,12 +1,17 @@
 
 if has("unix")
     if has("gui_running")
-        set guifont=Inconsolata\ Bold\ 14
+        set guifont=Inconsolata\ Medium\ 12
         set antialias
         
         autocmd GUIEnter * set vb t_vb=
     else
         set guifont=Inconsolata\ Medium\ 12
+    endif
+elseif has("win32") || has("win64")
+    if has("gui_running")
+        set guifont=Inconsolata_SemiBold:h12:W600:cANSI:qDRAFT
+        set lines=70 columns=150
     endif
 endif
 
