@@ -1,12 +1,12 @@
 
 if has("unix")
     if has("gui_running")
-        set guifont=Inconsolata\ Medium\ 12
+        set guifont=Inconsolata\ Bold\ 14
         set antialias
         
         autocmd GUIEnter * set vb t_vb=
     else
-        set guifont=Inconsolata\ Medium\ 12
+        set guifont=Inconsolata\ Bold\ 12
     endif
 elseif has("win32") || has("win64")
     if has("gui_running")
