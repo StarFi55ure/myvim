@@ -1,7 +1,7 @@
 
 if has("unix")
     if has("gui_running")
-        set guifont=Inconsolata\ Bold\ 14
+        set guifont=Inconsolata\ Bold\ 12
         set antialias
         
         autocmd GUIEnter * set vb t_vb=
