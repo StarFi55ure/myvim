@@ -63,7 +63,7 @@ inoremap jj <Esc>
 
 set t_Co=256
 
-colorscheme babelide
+"colorscheme babelide
 set encoding=utf-8
 
 "========================================
