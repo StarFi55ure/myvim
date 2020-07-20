@@ -2,6 +2,8 @@ set hlsearch
 set incsearch
 set ignorecase
 
+set visualbell
+set noerrorbells
 nmap gi :action GotoImplementation<CR>
 
 set ideajoin
