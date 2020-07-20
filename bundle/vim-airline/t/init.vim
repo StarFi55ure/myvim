@@ -34,7 +34,7 @@ describe 'init sections'
   end
 
   it 'section x should be filetype'
-    Expect g:airline_section_x == '%{airline#util#prepend("",0)}%{airline#util#prepend("",0)}%{airline#util#prepend("",0)}%{airline#util#wrap(airline#parts#filetype(),0)}'
+    Expect g:airline_section_x == '%{airline#util#prepend("",0)}%{airline#util#prepend("",0)}%{airline#util#prepend("",0)}%{airline#util#prepend("",0)}%{airline#util#wrap(airline#parts#filetype(),0)}'
   end
 
   it 'section y should be fenc and ff'
@@ -43,9 +43,9 @@ describe 'init sections'
   end
 
   it 'section z should be line numbers'
-    Expect g:airline_section_z =~ '%3p%%'
-    Expect g:airline_section_z =~ '%4l'
-    Expect g:airline_section_z =~ '%3v'
+    Expect g:airline_section_z =~ '%p%%'
+    Expect g:airline_section_z =~ '%l'
+    Expect g:airline_section_z =~ '%v'
   end
 
   it 'should not redefine sections already defined'

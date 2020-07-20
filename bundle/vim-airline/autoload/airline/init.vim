@@ -149,7 +149,7 @@ function! airline#init#bootstrap()
   call airline#parts#define_raw('file', '%f%m')
   call airline#parts#define_raw('path', '%F%m')
   call airline#parts#define('linenr', {
-        \ 'raw': '%{g:airline_symbols.linenr}%4l',
+        \ 'raw': '%{g:airline_symbols.linenr}%l',
         \ 'accent': 'bold'})
   call airline#parts#define('maxlinenr', {
         \ 'raw': '/%L%{g:airline_symbols.maxlinenr}',
@@ -178,6 +178,7 @@ function! airline#init#bootstrap()
   call airline#parts#define_text('grepper', '')
   call airline#parts#define_text('xkblayout', '')
   call airline#parts#define_text('keymap', '')
+  call airline#parts#define_text('omnisharp', '')
 
   unlet g:airline#init#bootstrapping
 endfunction
@@ -205,16 +206,16 @@ function! airline#init#sections()
     let g:airline_section_gutter = airline#section#create(['%='])
   endif
   if !exists('g:airline_section_x')
-    let g:airline_section_x = airline#section#create_right(['bookmark', 'tagbar', 'vista', 'gutentags', 'grepper', 'filetype'])
+    let g:airline_section_x = airline#section#create_right(['bookmark', 'tagbar', 'vista', 'gutentags', 'omnisharp', 'grepper', 'filetype'])
   endif
   if !exists('g:airline_section_y')
     let g:airline_section_y = airline#section#create_right(['ffenc'])
   endif
   if !exists('g:airline_section_z')
     if airline#util#winwidth() > 79
-      let g:airline_section_z = airline#section#create(['windowswap', 'obsession', '%3p%%'.spc, 'linenr', 'maxlinenr', spc.':%3v'])
+      let g:airline_section_z = airline#section#create(['windowswap', 'obsession', '%p%%'.spc, 'linenr', 'maxlinenr', ':%v'])
     else
-      let g:airline_section_z = airline#section#create(['%3p%%'.spc, 'linenr',  ':%3v'])
+      let g:airline_section_z = airline#section#create(['%p%%'.spc, 'linenr',  ':%v'])
     endif
   endif
   if !exists('g:airline_section_error')

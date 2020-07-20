@@ -28,14 +28,15 @@ endif
 call plug#begin('~/.vim/bundle')
 
 Plug 'bling/vim-airline'
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree'
+Plug 'majutsushi/tagbar'
+Plug 'sirver/ultisnips'
 Plug 'tpope/vim-surround'
 Plug 'flazz/vim-colorschemes'
-Plug '~/.vim/bundle/jupakevim'
+"Plug '~/.vim/bundle/jupakevim'
 Plug 'nelsonjchen/vim-carto'
-Plug 'vimwiki/vimwiki'
 Plug 'sirtaj/vim-openscad'
 
 call plug#end()
@@ -110,16 +111,12 @@ nnoremap <leader>ia :CtrlPActions<CR>
 
 autocmd VimEnter * wincmd p
 
+colorscheme darkocean
+
 "=========================================
 " Vimwiki Settings
 "=========================================
 
-let g:vimwiki_list = [{'path': '~/Dropbox/vimwiki/', 'syntax': 'markdown', 'ext': 'md'}]
-
-
-"=========================================
-" Setup powerline
-"=========================================
-"set rtp+=~/.myvim/bundle/powerline/powerline/bindings/vim
+" let g:vimwiki_list = [{'path': '~/Dropbox/vimwiki/', 'syntax': 'markdown', 'ext': 'md'}]
 
 
