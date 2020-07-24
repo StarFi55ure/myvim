@@ -38,6 +38,8 @@ Plug 'flazz/vim-colorschemes'
 "Plug '~/.vim/bundle/jupakevim'
 Plug 'nelsonjchen/vim-carto'
 Plug 'sirtaj/vim-openscad'
+Plug 'stephpy/vim-yaml'
+
 
 call plug#end()
 
