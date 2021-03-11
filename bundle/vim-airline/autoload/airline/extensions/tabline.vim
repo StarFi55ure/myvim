@@ -1,4 +1,4 @@
-" MIT License. Copyright (c) 2013-2020 Bailey Ling et al.
+" MIT License. Copyright (c) 2013-2021 Bailey Ling et al.
 " vim: et ts=2 sts=2 sw=2
 
 scriptencoding utf-8
@@ -102,7 +102,7 @@ function! airline#extensions#tabline#load_theme(palette)
   let colors    = get(a:palette, 'tabline', {})
   let tablabel  = get(colors, 'airline_tablabel', a:palette.normal.airline_b)
   " Theme for tabs on the left
-  let tab     = get(colors, 'airline_tab', a:palette.normal.airline_b)
+  let tab     = get(colors, 'airline_tab', a:palette.inactive.airline_c)
   let tabsel  = get(colors, 'airline_tabsel', a:palette.normal.airline_a)
   let tabtype = get(colors, 'airline_tabtype', a:palette.visual.airline_a)
   let tabfill = get(colors, 'airline_tabfill', a:palette.normal.airline_c)
@@ -184,6 +184,11 @@ function! airline#extensions#tabline#title(n)
 
   if empty(title) && exists('*gettabvar')
     let title = gettabvar(a:n, 'title')
+  endif
+
+  let formatter = get(g:, 'airline#extensions#tabline#tabtitle_formatter')
+  if empty(title) && formatter !=# '' && exists("*".formatter)
+    let title = call(formatter, [a:n])
   endif
 
   if empty(title)
