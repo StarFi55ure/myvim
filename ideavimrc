@@ -6,4 +6,6 @@ set visualbell
 set noerrorbells
 nmap gi :action GotoImplementation<CR>
 
+imap jj <Esc>
+
 set ideajoin
