@@ -3,17 +3,17 @@
 
 scriptencoding utf-8
 
-function! airline#extensions#wordcount#formatters#default#update_fmt(...)
-  let s:fmt = get(g:, 'airline#extensions#wordcount#formatter#default#fmt', '%s words')
-  let s:fmt_short = get(g:, 'airline#extensions#wordcount#formatter#default#fmt_short', s:fmt == '%s words' ? '%sW' : s:fmt)
+function! airline#extensions#wordcount#formatters#readingtime#update_fmt(...) abort
+  let s:fmt = get(g:, 'airline#extensions#wordcount#formatter#readingtime#fmt', 'About %s minutes')
+  let s:fmt_short = get(g:, 'airline#extensions#wordcount#formatter#readingtime#fmt_short', s:fmt ==# 'About %s minutes' ? '%sW' : s:fmt)
 endfunction
 
 " Reload format when statusline is rebuilt
-call airline#extensions#wordcount#formatters#default#update_fmt()
+call airline#extensions#wordcount#formatters#readingtime#update_fmt()
 
-if index(g:airline_statusline_funcrefs, function('airline#extensions#wordcount#formatters#default#update_fmt')) == -1
+if index(g:airline_statusline_funcrefs, function('airline#extensions#wordcount#formatters#readingtime#update_fmt')) == -1
   " only add it, if not already done
-  call airline#add_statusline_funcref(function('airline#extensions#wordcount#formatters#default#update_fmt'))
+  call airline#add_statusline_funcref(function('airline#extensions#wordcount#formatters#readingtime#update_fmt'))
 endif
 
 if match(get(v:, 'lang', ''), '\v\cC|en') > -1
@@ -24,7 +24,7 @@ else
   let s:decimal_group = ''
 endif
 
-function! airline#extensions#wordcount#formatters#default#to_string(wordcount)
+function! airline#extensions#wordcount#formatters#readingtime#to_string(wordcount) abort
   if airline#util#winwidth() > 85
     if a:wordcount > 999
       " Format number according to locale, e.g. German: 1.245 or English: 1,245
@@ -32,9 +32,9 @@ function! airline#extensions#wordcount#formatters#default#to_string(wordcount)
     else
       let wordcount = a:wordcount
     endif
-    let str = printf(s:fmt, wordcount)
+    let str = printf(s:fmt, ceil(wordcount / 200.0))
   else
-    let str = printf(s:fmt_short, a:wordcount)
+    let str = printf(s:fmt_short, ceil(a:wordcount / 200.0))
   endif
 
   let str .= g:airline_symbols.space
