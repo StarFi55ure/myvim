@@ -114,7 +114,7 @@ nnoremap <leader>ia :CtrlPActions<CR>
 
 autocmd VimEnter * wincmd p
 
-colorscheme darkocean
+colorscheme badwolf
 
 "=========================================
 " Vimwiki Settings
