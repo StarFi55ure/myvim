@@ -33,6 +33,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree'
 Plug 'majutsushi/tagbar'
 Plug 'sirver/ultisnips'
+Plug 'honza/vim-snippets'
 Plug 'tpope/vim-surround'
 Plug 'flazz/vim-colorschemes'
 "Plug '~/.vim/bundle/jupakevim'
@@ -113,7 +114,7 @@ nnoremap <leader>ia :CtrlPActions<CR>
 
 autocmd VimEnter * wincmd p
 
-colorscheme darkocean
+colorscheme badwolf
 
 "=========================================
 " Vimwiki Settings
@@ -121,4 +122,11 @@ colorscheme darkocean
 
 " let g:vimwiki_list = [{'path': '~/Dropbox/vimwiki/', 'syntax': 'markdown', 'ext': 'md'}]
 
+"=========================================
+" Ultisnips
+"=========================================
 
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsEditSplit="vertical"
