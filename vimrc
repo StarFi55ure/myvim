@@ -40,7 +40,7 @@ Plug 'flazz/vim-colorschemes'
 Plug 'nelsonjchen/vim-carto'
 Plug 'sirtaj/vim-openscad'
 Plug 'stephpy/vim-yaml'
-
+Plug 'vim-scripts/haproxy'
 
 call plug#end()
 
@@ -62,6 +62,7 @@ autocmd FileType text setlocal textwidth=80
 autocmd FileType python setlocal textwidth=80
 
 autocmd BufRead,BufNewFile *.tal set filetype=html
+au BufRead,BufNewFile haproxy* set ft=haproxy
 
 inoremap jj <Esc>
 
