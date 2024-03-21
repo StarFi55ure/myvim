@@ -63,6 +63,7 @@ autocmd FileType python setlocal textwidth=80
 
 autocmd BufRead,BufNewFile *.tal set filetype=html
 au BufRead,BufNewFile haproxy* set ft=haproxy
+au BufRead,BufNewFile *.map set ft=map
 
 inoremap jj <Esc>
 
