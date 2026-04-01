@@ -41,6 +41,7 @@ Plug 'nelsonjchen/vim-carto'
 Plug 'sirtaj/vim-openscad'
 Plug 'stephpy/vim-yaml'
 Plug 'vim-scripts/haproxy'
+Plug 'vimwiki/vimwiki'
 
 call plug#end()
 
@@ -114,15 +115,21 @@ let g:ctrlp_extensions = ['ideactions']
 
 nnoremap <leader>ia :CtrlPActions<CR>
 
-autocmd VimEnter * wincmd p
-
-colorscheme badwolf
-
 "=========================================
 " Vimwiki Settings
 "=========================================
 
-" let g:vimwiki_list = [{'path': '~/Dropbox/vimwiki/', 'syntax': 'markdown', 'ext': 'md'}]
+let main_wiki = {}
+let main_wiki.name = 'Main'
+let main_wiki.path = '~/Documents/vimwiki'
+let main_wiki.path_html = '~/publit_html/vimwiki'
+
+let g:vimwiki_list = [main_wiki]
+
+let g:vimwiki_global_ext = 0
+let g:vimwiki_ext2syntax = {}
+
+"let g:vimwiki_list = [{'path': '~/Dropbox/vimwiki/', 'syntax': 'markdown', 'ext': 'md'}]
 
 "=========================================
 " Ultisnips
@@ -132,3 +139,11 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:UltiSnipsEditSplit="vertical"
+
+"=========================================
+" Other Settings
+"=========================================
+
+autocmd VimEnter * wincmd p
+
+colorscheme badwolf
