@@ -123,6 +123,7 @@ let main_wiki = {}
 let main_wiki.name = 'Main'
 let main_wiki.path = '~/Documents/vimwiki'
 let main_wiki.path_html = '~/publit_html/vimwiki'
+let main_wiki.auto_toc = 1
 
 let g:vimwiki_list = [main_wiki]
 
