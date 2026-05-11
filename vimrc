@@ -129,6 +129,7 @@ let g:vimwiki_list = [main_wiki]
 
 let g:vimwiki_global_ext = 0
 let g:vimwiki_ext2syntax = {}
+let g:vimwiki_folding = 'list'
 
 "let g:vimwiki_list = [{'path': '~/Dropbox/vimwiki/', 'syntax': 'markdown', 'ext': 'md'}]
 
@@ -144,6 +145,8 @@ let g:UltiSnipsEditSplit="vertical"
 "=========================================
 " Other Settings
 "=========================================
+
+set foldmethod=expr
 
 autocmd VimEnter * wincmd p
 
