@@ -35,10 +35,18 @@ echo "Starting VIM setup..."
 if [ -d $HOME/.vim ]; then
     rm -fr $HOME/.vim
 fi
-echo "Linking `pwd` to \$HOME/.vim"
+echo "Linking $VIM_ROOT to \$HOME/.vim"
 ln -s $VIM_ROOT $HOME/.vim
 
 root_dir=`pwd`
 
 
 echo "Starting NVIM setup..."
+if [ -d $HOME/.config/nvim ]; then
+    echo "Removing old nvim config directory"
+    rm -fr $HOME/.config/nvim
+fi
+echo "Linking $NVIM_ROOT to \$HOME/.config/nvim"
+mdkir -p $HOME/.config
+ln -s $NVIM_ROOT $HOME/.config/nvim
+
