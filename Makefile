@@ -1,8 +1,8 @@
 
 
 all: setup
-	./setup.zsh
+	@echo "Done"
 
 setup:
-	./setup.zsh
+	./setup.sh
 
