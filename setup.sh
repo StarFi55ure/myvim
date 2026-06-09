@@ -47,6 +47,6 @@ if [ -d $HOME/.config/nvim ]; then
     rm -fr $HOME/.config/nvim
 fi
 echo "Linking $NVIM_ROOT to \$HOME/.config/nvim"
-mdkir -p $HOME/.config
+mkdir -p $HOME/.config
 ln -s $NVIM_ROOT $HOME/.config/nvim
 
