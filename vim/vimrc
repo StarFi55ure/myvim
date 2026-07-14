@@ -59,6 +59,42 @@ set hlsearch
 set incsearch
 set number
 
+set background=dark
+
+"=========================================
+" Color Scheme settings
+"=========================================
+"
+"augroup VimwikiBadwolfHeaders
+"  autocmd!
+"  autocmd ColorScheme badwolf highlight VimwikiHeader1 guifg=#ffa724 ctermfg=214 gui=bold cterm=bold " orange
+"  autocmd ColorScheme badwolf highlight VimwikiHeader2 guifg=#aeee00 ctermfg=154 gui=bold cterm=bold " lime
+"  autocmd ColorScheme badwolf highlight VimwikiHeader3 guifg=#0a9dff ctermfg=39  gui=bold cterm=bold " tardis
+"  autocmd ColorScheme badwolf highlight VimwikiHeader4 guifg=#ff9eb8 ctermfg=211 gui=bold cterm=bold " dress
+"  autocmd ColorScheme badwolf highlight VimwikiHeader5 guifg=#b88853 ctermfg=137 gui=bold cterm=bold " toffee
+"  autocmd ColorScheme badwolf highlight VimwikiHeader6 guifg=#8cffba ctermfg=121 gui=bold cterm=bold " saltwatertaffy
+"augroup END
+
+augroup VimwikiBadwolfHeaders
+  autocmd!
+
+  autocmd ColorScheme badwolf highlight VimwikiHeader1 guifg=#aeee00 ctermfg=154 gui=bold cterm=bold " lime
+  autocmd ColorScheme badwolf highlight VimwikiHeader2 guifg=#0a9dff ctermfg=39  gui=bold cterm=bold " tardis
+  autocmd ColorScheme badwolf highlight VimwikiHeader3 guifg=#ffa724 ctermfg=214 gui=bold cterm=bold " orange
+  autocmd ColorScheme badwolf highlight VimwikiHeader4 guifg=#ff9eb8 ctermfg=211 gui=bold cterm=bold " dress
+  autocmd ColorScheme badwolf highlight VimwikiHeader5 guifg=#b88853 ctermfg=137 gui=bold cterm=bold " toffee
+  autocmd ColorScheme badwolf highlight VimwikiHeader6 guifg=#8cffba ctermfg=121 gui=bold cterm=bold " saltwatertaffy
+augroup END
+
+colorscheme badwolf
+
+"=========================================
+" Other Settings
+"=========================================
+
+set foldmethod=expr
+
+
 autocmd FileType text setlocal textwidth=80
 autocmd FileType python setlocal textwidth=80
 
@@ -70,7 +106,6 @@ inoremap jj <Esc>
 
 set t_Co=256
 
-"colorscheme babelide
 set encoding=utf-8
 
 "========================================
@@ -142,12 +177,5 @@ let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:UltiSnipsEditSplit="vertical"
 
-"=========================================
-" Other Settings
-"=========================================
-
-set foldmethod=expr
-
 autocmd VimEnter * wincmd p
 
-colorscheme badwolf

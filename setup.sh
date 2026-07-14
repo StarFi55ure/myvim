@@ -41,12 +41,12 @@ ln -s $VIM_ROOT $HOME/.vim
 root_dir=`pwd`
 
 
-echo "Starting NVIM setup..."
-if [ -d $HOME/.config/nvim ]; then
-    echo "Removing old nvim config directory"
-    rm -fr $HOME/.config/nvim
-fi
-echo "Linking $NVIM_ROOT to \$HOME/.config/nvim"
-mkdir -p $HOME/.config
-ln -s $NVIM_ROOT $HOME/.config/nvim
+#echo "Starting NVIM setup..."
+#if [ -d $HOME/.config/nvim ]; then
+#    echo "Removing old nvim config directory"
+#    rm -fr $HOME/.config/nvim
+#fi
+#echo "Linking $NVIM_ROOT to \$HOME/.config/nvim"
+#mkdir -p $HOME/.config
+#ln -s $NVIM_ROOT $HOME/.config/nvim
 
