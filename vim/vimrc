@@ -42,6 +42,7 @@ Plug 'sirtaj/vim-openscad'
 Plug 'stephpy/vim-yaml'
 Plug 'vim-scripts/haproxy'
 Plug 'vimwiki/vimwiki'
+Plug 'liuchengxu/vista.vim'
 
 call plug#end()
 
@@ -164,7 +165,8 @@ let g:vimwiki_list = [main_wiki]
 
 let g:vimwiki_global_ext = 0
 let g:vimwiki_ext2syntax = {}
-let g:vimwiki_folding = 'list'
+"let g:vimwiki_folding = 'list'
+let g:vimwiki_folding = ''
 
 "let g:vimwiki_list = [{'path': '~/Dropbox/vimwiki/', 'syntax': 'markdown', 'ext': 'md'}]
 
