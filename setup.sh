@@ -10,21 +10,24 @@ if [[ $platform == 'Darwin' ]]; then
 fi
 
 # create vimrc
-if [ -e $HOME/.vimrc ]; then
+if [ -L $HOME/.vimrc ]; then
+    echo "Removing vimrc"
     rm -f $HOME/.vimrc
 fi
 vimrc_file=`readlink -f $VIM_ROOT/vimrc`
 ln -s $vimrc_file $HOME/.vimrc
 
 # create gvimrc
-if [ -e $HOME/.gvimrc ]; then
+if [ -L $HOME/.gvimrc ]; then
+    echo "Removing gvimrc"
     rm -f $HOME/.gvimrc
 fi
 gvimrc_file=`readlink -f $VIM_ROOT/gvimrc`
 ln -s $gvimrc_file $HOME/.gvimrc
 
 # ideavimrc
-if [ -e $HOME/.ideavimrc ]; then
+if [ -L $HOME/.ideavimrc ]; then
+    echo "Removing ideavimrc"
     rm -f $HOME/.ideavimrc
 fi
 ideavimrc_file=`readlink -f $VIM_ROOT/ideavimrc`
@@ -32,7 +35,8 @@ ln -s $ideavimrc_file $HOME/.ideavimrc
 
 echo "Starting VIM setup..."
 # link vim directory
-if [ -d $HOME/.vim ]; then
+if [ -L $HOME/.vim ]; then
+    echo "Removing vim directory"
     rm -fr $HOME/.vim
 fi
 echo "Linking $VIM_ROOT to \$HOME/.vim"

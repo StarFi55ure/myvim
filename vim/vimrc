@@ -160,6 +160,8 @@ let main_wiki.name = 'Main'
 let main_wiki.path = '~/Documents/vimwiki'
 let main_wiki.path_html = '~/publit_html/vimwiki'
 let main_wiki.auto_toc = 1
+let main_wiki.syntax = 'markdown'
+let main_wiki.ext = '.md'
 
 let g:vimwiki_list = [main_wiki]
 
